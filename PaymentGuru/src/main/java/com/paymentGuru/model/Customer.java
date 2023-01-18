@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +26,25 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
+
+	@NotBlank
+	@NotEmpty
+	@NotNull
+	@Size(min = 3, max = 20, message = "Customer name should be min 3 and max 20 character length")
 	private String name;
+	@NotBlank
+	@NotEmpty
+	@NotNull
+	@Size(min = 10, max = 10, message = "mobileNumber Should be 10 digit length")
 	private String mobileNumber;
-	private String Password;
+	@NotBlank
+	@NotEmpty
+	@NotNull
+	@Size(min = 8, max = 15, message = "Password should be min 8 and max 15 character length")
+	private String password;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 }
+
+//{"name":"Sandeep","mobileNumber":"8860578503","wallet":{"balance":10000},"password":"123456789"}
