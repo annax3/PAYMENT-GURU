@@ -7,5 +7,5 @@ import com.paymentGuru.model.CustomerSession;
 
 @Repository
 public interface CustomerSessionDao extends JpaRepository<CustomerSession, Integer> {
-
+	public CustomerSession findByUniqueId(String UniqueId);
 }

@@ -24,8 +24,17 @@ public class Customer {
 	private Integer customerId;
 	private String name;
 	private String mobileNumber;
-	private String Password;
+	private String password;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 }
+
+//{
+//    "name": "Sandeep",
+//    "mobileNumber": "8860578503",
+//    "wallet": {
+//        "balance": 10000
+//    },
+//    "password": "123456789"
+//}
