@@ -1,5 +1,7 @@
 package com.paymentGuru.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +22,13 @@ public class CustomerController {
 	private CustomerService cService;
 
 	@PostMapping("/customer")
-	public ResponseEntity<Customer> createCustomerHandler(@RequestBody Customer customer) {
+	public ResponseEntity<Customer> createCustomerHandler(@Valid @RequestBody Customer customer) {
 		Customer newCustomer = cService.createCustomer(customer);
 		return new ResponseEntity<Customer>(newCustomer, HttpStatus.ACCEPTED);
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> loginCustomerHandler(@RequestBody CustomerLoginDTO customerDTO) {
+	public ResponseEntity<String> loginCustomerHandler(@Valid @RequestBody CustomerLoginDTO customerDTO) {
 
 		return new ResponseEntity<String>(cService.customerLogin(customerDTO), HttpStatus.ACCEPTED);
 	}
