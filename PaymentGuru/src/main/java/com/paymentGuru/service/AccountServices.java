@@ -10,11 +10,10 @@ import com.paymentGuru.model.Customer;
 @Service
 public interface AccountServices {
 	public Customer addAccount(BankAccount Account, String uniqueId);
-	// stop adding same bank account
 
-	public Customer deleteAccount(BankAccount Account, String uniqueId);
+	public Customer deleteAccount(Integer accountId, String uniqueId);
 
 	public BankAccount ViewAccount(String accountNo, String uniqueId);
-	
-	// View All account (wallet wallet)
+
+	public List<BankAccount> ViewAllAccount(Integer walletId, String uniqueId);
 }

@@ -32,9 +32,9 @@ public class BankAccountController {
 
 	}
 
-	@PatchMapping("/bankaccount/{uniqueId}")
-	public ResponseEntity<Customer> ViewAccount(@RequestBody BankAccount Account, @PathVariable String uniqueId) {
-		Customer customer = aServices.deleteAccount(Account, uniqueId);
+	@PatchMapping("/bankaccount/{accountId}/{uniqueId}")
+	public ResponseEntity<Customer> ViewAccount(@PathVariable Integer accountId, @PathVariable String uniqueId) {
+		Customer customer = aServices.deleteAccount(accountId, uniqueId);
 
 		return new ResponseEntity<Customer>(customer, HttpStatus.ACCEPTED);
 
@@ -45,6 +45,15 @@ public class BankAccountController {
 		BankAccount bankAccount = aServices.ViewAccount(accountNo, uniqueId);
 
 		return new ResponseEntity<BankAccount>(bankAccount, HttpStatus.ACCEPTED);
+
+	}
+
+	@GetMapping("/bankaccounts/{walletId}/{uniqueId}")
+	public ResponseEntity<List<BankAccount>> ViewAllAccount(@PathVariable Integer walletId,
+			@PathVariable String uniqueId) {
+		List<BankAccount> bankAccounts = aServices.ViewAllAccount(walletId, uniqueId);
+
+		return new ResponseEntity<List<BankAccount>>(bankAccounts, HttpStatus.ACCEPTED);
 
 	}
 

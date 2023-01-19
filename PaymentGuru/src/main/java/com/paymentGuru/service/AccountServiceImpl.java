@@ -11,7 +11,9 @@ import com.paymentGuru.exception.CustomerException;
 import com.paymentGuru.model.BankAccount;
 import com.paymentGuru.model.Customer;
 import com.paymentGuru.model.CustomerSession;
+import com.paymentGuru.model.Wallet;
 import com.paymentGuru.repository.CustomerDao;
+import com.paymentGuru.repository.WalletDao;
 import com.paymentGuru.repository.accountDao;
 
 @Service
@@ -25,6 +27,9 @@ public class AccountServiceImpl implements AccountServices {
 
 	@Autowired
 	private accountDao bDao;
+
+	@Autowired
+	private WalletDao wDao;
 
 	@Override
 	public Customer addAccount(BankAccount Account, String uniqueId) {
@@ -62,11 +67,11 @@ public class AccountServiceImpl implements AccountServices {
 	}
 
 	@Override
-	public Customer deleteAccount(BankAccount Account, String uniqueId) {
+	public Customer deleteAccount(Integer accountId, String uniqueId) {
 		CustomerSession session = csDao.checkCustomerSession(uniqueId);
 
 		if (session != null) {
-			Optional<BankAccount> opt = bDao.findById(Account.getId());
+			Optional<BankAccount> opt = bDao.findById(accountId);
 			if (opt.isPresent()) {
 				bDao.delete(opt.get());
 				Optional<Customer> optc = cDao.findById(session.getId());
@@ -109,6 +114,23 @@ public class AccountServiceImpl implements AccountServices {
 		} else {
 			throw new CustomerException("Customer not logged in");
 		}
+	}
+
+	@Override
+	public List<BankAccount> ViewAllAccount(Integer walletId, String uniqueId) {
+		CustomerSession session = csDao.checkCustomerSession(uniqueId);
+		if (session != null) {
+			Optional<Wallet> opt = wDao.findById(walletId);
+			if (opt.isPresent()) {
+				List<BankAccount> banks = opt.get().getBanks();
+				return banks;
+			} else {
+				throw new CustomerException("Wronge wallet id");
+			}
+		} else {
+			throw new CustomerException("Customer not logged in");
+		}
+
 	}
 
 }
