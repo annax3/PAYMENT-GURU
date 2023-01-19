@@ -25,12 +25,12 @@ public class BankAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer accountNo;
+	private String accountNo;
 	private String ifscCode;
 	private String bankName;
 	private Long balance;
 
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Wallet wallet;
 }
