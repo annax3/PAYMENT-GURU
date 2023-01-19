@@ -1,8 +1,13 @@
 package com.paymentGuru.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +31,21 @@ public class BankAccountController {
 		return new ResponseEntity<Customer>(customer, HttpStatus.ACCEPTED);
 
 	}
-	
-	
+
+	@PatchMapping("/bankaccount/{uniqueId}")
+	public ResponseEntity<Customer> ViewAccount(@RequestBody BankAccount Account, @PathVariable String uniqueId) {
+		Customer customer = aServices.deleteAccount(Account, uniqueId);
+
+		return new ResponseEntity<Customer>(customer, HttpStatus.ACCEPTED);
+
+	}
+
+	@GetMapping("/bankaccount/{accountNo}/{uniqueId}")
+	public ResponseEntity<BankAccount> ViewAccount(@PathVariable String accountNo, @PathVariable String uniqueId) {
+		BankAccount bankAccount = aServices.ViewAccount(accountNo, uniqueId);
+
+		return new ResponseEntity<BankAccount>(bankAccount, HttpStatus.ACCEPTED);
+
+	}
+
 }

@@ -48,3 +48,10 @@ public class Customer {
 }
 
 //{"name":"Sandeep","mobileNumber":"8860578503","wallet":{"balance":10000},"password":"123456789"}
+
+//{
+//"accountNo":"123456789",
+//"ifscCode":"SBIN0788",
+//"bankName":"SBI",
+//"balance":"20000"
+//}
