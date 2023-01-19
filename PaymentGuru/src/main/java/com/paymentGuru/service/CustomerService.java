@@ -6,7 +6,7 @@ import com.paymentGuru.model.Customer;
 import com.paymentGuru.model.CustomerLoginDTO;
 import com.paymentGuru.model.CustomerSession;
 
-@Service
+
 public interface CustomerService {
 	public Customer createCustomer(Customer customer);
 
