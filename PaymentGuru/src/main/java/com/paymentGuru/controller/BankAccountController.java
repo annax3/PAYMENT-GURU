@@ -56,5 +56,7 @@ public class BankAccountController {
 		return new ResponseEntity<List<BankAccount>>(bankAccounts, HttpStatus.ACCEPTED);
 
 	}
+	
+	////////////////
 
 }
