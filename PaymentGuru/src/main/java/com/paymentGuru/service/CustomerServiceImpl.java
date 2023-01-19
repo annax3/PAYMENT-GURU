@@ -67,4 +67,16 @@ public class CustomerServiceImpl implements CustomerService {
 
 	}
 
+	@Override
+	public CustomerSession checkCustomerSession(String uniqueId) {
+		CustomerSession cSession = csDao.findByUniqueId(uniqueId);
+		if (cSession != null) {
+
+			return cSession;
+		} else {
+			return null;
+		}
+
+	}
+
 }

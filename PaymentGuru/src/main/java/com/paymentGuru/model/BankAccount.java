@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,11 +24,13 @@ import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 public class BankAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private Integer accountNo;
 	private String ifscCode;
 	private String bankName;
 	private Long balance;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 }
