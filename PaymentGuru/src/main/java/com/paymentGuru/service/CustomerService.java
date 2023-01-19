@@ -13,4 +13,6 @@ public interface CustomerService {
 	public String customerLogin(CustomerLoginDTO customerDto);
 
 	public String customerLogout(String uniqueId);
+
+	public CustomerSession checkCustomerSession(String UniqueId);
 }
