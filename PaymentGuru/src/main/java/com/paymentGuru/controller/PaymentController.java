@@ -27,11 +27,11 @@ public class PaymentController {
 		return new ResponseEntity<BillPayment>(savedBillPayment, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/billpayments/{uuid}/{billId}")
-	public ResponseEntity<BillPayment> getBillPaymentByBillIdHandler(@PathVariable("billId") Integer billId,
-			@PathVariable("uuid") String uuid) throws BillPaymentException {
-
-		BillPayment bill = billPaymentService.viewBillPayment(uuid, billId);
-		return new ResponseEntity<BillPayment>(bill, HttpStatus.OK);
-	}
+//	@GetMapping("/billpayments/{uuid}/{billId}")
+//	public ResponseEntity<BillPayment> getBillPaymentByBillIdHandler(@PathVariable("billId") Integer billId,
+//			@PathVariable("uuid") String uuid) throws BillPaymentException {
+//
+//		BillPayment bill = billPaymentService.viewBillPayment(uuid, billId);
+//		return new ResponseEntity<BillPayment>(bill, HttpStatus.OK);
+//	}
 }

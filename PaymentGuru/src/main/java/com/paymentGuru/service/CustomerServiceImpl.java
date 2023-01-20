@@ -80,6 +80,16 @@ public class CustomerServiceImpl implements CustomerService {
 
 	}
 
-
+	@Override
+	public Customer viewCustomerDetails(String UniqueId) {
+		CustomerSession cSession = csDao.findByUniqueId(UniqueId);
+		if (cSession != null) {
+			Optional<Customer> opt = cDao.findById(cSession.getId());
+			Customer customer = opt.get();
+			return customer;
+		} else {
+			throw new CustomerException("User must be logged in!");
+		}
+	}
 
 }

@@ -17,4 +17,6 @@ public interface CustomerService {
 
 	public CustomerSession checkCustomerSession(String UniqueId);
 	
+	public Customer viewCustomerDetails(String UniqueId);
+	
 }

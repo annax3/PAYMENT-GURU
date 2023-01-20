@@ -12,7 +12,7 @@ public interface BillPaymentService {
 	public BillPayment addBillPayment(BillPayment payment, String uuid) throws WalletException ;
 
 	
-	public BillPayment viewBillPayment(String uid, Integer billId) throws BillPaymentException ;
+	//public BillPayment viewBillPayment(String uid, Integer billId) throws BillPaymentException ;
 	
 	
 }
