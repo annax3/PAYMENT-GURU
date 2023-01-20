@@ -1,6 +1,7 @@
 package com.paymentGuru.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,6 +78,18 @@ public class CustomerServiceImpl implements CustomerService {
 			return null;
 		}
 
+	}
+
+	@Override
+	public Customer getCustomerByUuid(String uuid){
+		// TODO Auto-generated method stub
+		
+		CustomerSession customerSession = csDao.findByUniqueId(uuid);
+		
+		Optional<Customer> customer = cDao.findById(customerSession.getCustomerId());					
+				
+		
+				return customer.get()  ;
 	}
 
 }
