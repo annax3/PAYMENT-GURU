@@ -32,5 +32,7 @@ public class Wallet {
 	private Long balance;
 	@OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
 	List<BankAccount> banks = new ArrayList<>();
+	
+	
 
 }
