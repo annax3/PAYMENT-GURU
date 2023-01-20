@@ -1,6 +1,7 @@
 package com.paymentGuru.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,9 @@ import org.springframework.stereotype.Service;
 import com.paymentGuru.exception.BeneficiaryException;
 import com.paymentGuru.exception.CustomerException;
 import com.paymentGuru.model.Beneficiary;
+import com.paymentGuru.model.Customer;
+import com.paymentGuru.model.CustomerSession;
+import com.paymentGuru.repository.BeneficiaryDAO;
 import com.paymentGuru.repository.CustomerDao;
 import com.paymentGuru.repository.CustomerSessionDao;
 
@@ -23,16 +27,16 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	private BeneficiaryDAO beneficiaryDAO;
 
 	@Override
-	public Beneficiary addBeneficiary(Beneficiary beneficiary, String key)
+	public Beneficiary addBeneficiary(Beneficiary beneficiary, Integer Id)
 			throws BeneficiaryException, CustomerException {
 
-		CurrentUserSession loggedInUser = sessionDAO.findByUuid(key);
+		CustomerSession loggedInUser = sessionDAO.findByUniqueId(Id);
 
 		if (loggedInUser == null) {
 			throw new CustomerException("Please provide a valid key to  add beneficiary...");
 		}
 
-		Customer existingCustomer = customerDAO.findById(beneficiary.getCustomer().getCid())
+		Customer existingCustomer = customerDAO.findById(beneficiary.getCustomer().getcustomerId())
 				.orElseThrow(() -> new CustomerException("customer not found..create account"));
 		beneficiary.setCustomer(existingCustomer);
 		return beneficiaryDAO.save(beneficiary);
@@ -40,9 +44,9 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	}
 
 	@Override
-	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, String key)
+	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, Integer Id)
 			throws CustomerException, BeneficiaryException {
-		CurrentUserSession loggedInUser = sessionDAO.findByUuid(key);
+		CustomerSession loggedInUser = sessionDAO.findByUniqueId(Id);
 
 		if (loggedInUser == null) {
 			throw new CustomerException("Please provide a valid key to  add beneficiary...");
@@ -51,7 +55,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 		Beneficiary existingBeneficiary = beneficiaryDAO.findById(beneficiary.getBid())
 				.orElseThrow(() -> new BeneficiaryException("enter corrent beneficiary details"));
 
-		if (existingBeneficiary.getCustomer().getCid() != loggedInUser.getUserId())
+		if (existingBeneficiary.getCustomer().getcustomerId() != loggedInUser.getUserId())
 			throw new CustomerException("customer not found...");
 
 		beneficiaryDAO.delete(existingBeneficiary);
@@ -60,10 +64,10 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	}
 
 	@Override
-	public List<Beneficiary> viewBeneficiaries(String mobileNo, String key)
+	public List<Beneficiary> viewBeneficiaries(String mobileNo, Integer Id)
 			throws CustomerException, BeneficiaryException {
 
-		CurrentUserSession loggedInUser = sessionDAO.findByUuid(key);
+		CustomerSession loggedInUser = sessionDAO.findByUniqueId(Id);
 
 		if (loggedInUser == null) {
 			throw new CustomerException("Please provide a valid key to  add beneficiary...");

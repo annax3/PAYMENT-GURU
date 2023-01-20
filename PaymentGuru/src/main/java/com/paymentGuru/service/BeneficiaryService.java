@@ -7,12 +7,14 @@ import com.paymentGuru.exception.CustomerException;
 import com.paymentGuru.model.Beneficiary;
 
 public interface BeneficiaryService {
-	public Beneficiary addBeneficiary(Beneficiary beneficiary, String key)
+	public Beneficiary addBeneficiary(Beneficiary beneficiary, Integer Id)
 			throws BeneficiaryException, CustomerException;
 
-	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, String key)
+	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, Integer Id)
 			throws CustomerException, BeneficiaryException;
 
-	public List<Beneficiary> viewBeneficiaries(String mobileNo, String key)
+	public List<Beneficiary> viewBeneficiaries(String mobileNo, Integer Id)
 			throws CustomerException, BeneficiaryException;
 }
+
+	

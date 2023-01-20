@@ -22,4 +22,30 @@ public class Beneficiary {
 	@ManyToOne
 	@JoinColumn(name = "cusomerId")
 	private Customer customer;
+	public Integer getBid() {
+		return bid;
+	}
+	public void setBid(Integer bid) {
+		this.bid = bid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMobileNo() {
+		return mobileNo;
+	}
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	
 }	
