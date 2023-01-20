@@ -27,7 +27,7 @@ public class BillPaymentServiceImpl implements BillPaymentService{
 	
 	
 
-	@Override
+	/*@Override
 	public BillPayment viewBillPayment(String uid, Integer billId) throws BillPaymentException {
 		// TODO Auto-generated method stub
 		CustomerSession customerSession = csd.findByUniqueId(uid);
@@ -49,16 +49,16 @@ public class BillPaymentServiceImpl implements BillPaymentService{
 		if (payment != null) {
 			return payment;
 		} else
-			throw new BillPaymentException("Bill Details not Found");
+			throw new BillPaymentException("invalid credentials");
 		
 		
 		return null;
-	}
+	}*/
 	
 	
 	
 	
-	public BillPayment addBillPayment(BillPayment payment , String uid) {
+/*	public BillPayment addBillPayment(BillPayment payment , String uid)throws WalletException{
 		
 		
 			CustomerSession customerSession = csd.findByUniqueId(uid);
@@ -87,7 +87,24 @@ public class BillPaymentServiceImpl implements BillPaymentService{
 
 		//}
 	
-	}
+	}*/
+	
+	public BillPayment addBillPayment(BillPayment payment , String uid)throws WalletException{
+		
+		
+		
+		//Transaction transaction = new Transaction();
+	//	transaction.setTransactionDate(LocalDateTime.now());
+	//	transaction.setAmount(payment.getAmount());
+	//	transaction.setDescription("Bill is paid");
+	//	transaction.setTransactionType(payment.getBillType());
+	//	ts.addTransaction(transaction, uid);
+
+		return bpd.save(payment);
+
+	//}
+
+}
 
 }
 
