@@ -80,16 +80,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	}
 
-	@Override
-	public Customer getCustomerByUuid(String uuid){
-		// TODO Auto-generated method stub
-		
-		CustomerSession customerSession = csDao.findByUniqueId(uuid);
-		
-		Optional<Customer> customer = cDao.findById(customerSession.getCustomerId());					
-				
-		
-				return customer.get()  ;
-	}
+
 
 }
