@@ -1,1 +1,1 @@
-# REST API for Wallet Payment Application (PAYMENTGURU)
+# REST API for Wallet Payment Application (PAYMENT GURU) .
