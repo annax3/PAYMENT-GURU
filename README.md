@@ -48,4 +48,6 @@ http://localhost:8888/swagger-ui/
 
 # Collaborators
 
+- [Prashant Anand](https://github.com/annax3)
 - [Sanket Paharia](https://github.com/SanketPaharia)
+
