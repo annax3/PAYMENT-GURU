@@ -33,4 +33,46 @@ public class BillPayment {
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
+
+	public Integer getBillId() {
+		return billId;
+	}
+
+	public void setBillId(Integer billId) {
+		this.billId = billId;
+	}
+
+	public String getBillType() {
+		return billType;
+	}
+
+	public void setBillType(String billType) {
+		this.billType = billType;
+	}
+
+	public Long getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Long amount) {
+		this.amount = amount;
+	}
+
+	public LocalDate getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(LocalDate paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+
+	public Wallet getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(Wallet wallet) {
+		this.wallet = wallet;
+	}
+	
+	
 }
