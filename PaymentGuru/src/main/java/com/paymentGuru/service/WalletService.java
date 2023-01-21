@@ -12,8 +12,8 @@ public interface WalletService {
 
 	public Wallet addMoneytoWallet(Integer BankId, Long amount, String uniqueId);
 
-//    public boolean fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount);
-//    public Customer depositAmount(Customer customer, BigDecimal amount);
-//    public List<Customer> getCustomers();
+	public Wallet transferToBank(Integer BankId, Long amount, String uniqueId);
+
+	public Wallet fundTransfer(String sourceMobileNo, String targetMobileNo, Long amount, String uniqueId);
 
 }

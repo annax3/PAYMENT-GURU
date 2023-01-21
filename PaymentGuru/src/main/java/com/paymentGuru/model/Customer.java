@@ -85,11 +85,10 @@ public class Customer {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
-	
-	
+
 }
 
-//{"name":"Sandeep","mobileNumber":"8860578503","wallet":{"balance":10000},"password":"123456789"}
+//{"name":"Sandeep","mobileNumber":"8860578503","wallet":{"balance":1},"password":"123456789"}
 
 //{
 //"accountNo":"123456789",

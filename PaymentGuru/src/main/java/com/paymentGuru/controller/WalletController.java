@@ -34,4 +34,18 @@ public class WalletController {
 		return new ResponseEntity<Wallet>(wallet, HttpStatus.OK);
 	}
 
+	@PostMapping("/bankTrf/{BankId}/{amount}/{uniqueId}")
+	public ResponseEntity<Wallet> transferToBank(@PathVariable Integer BankId, @PathVariable Long amount,
+			@PathVariable String uniqueId) {
+		Wallet wallet = walletService.transferToBank(BankId, amount, uniqueId);
+		return new ResponseEntity<Wallet>(wallet, HttpStatus.OK);
+	}
+
+	@PostMapping("/bankTrf/{sourceMobileNo}/{targetMobileNo}/{amount}/{uniqueId}")
+	public ResponseEntity<Wallet> transferToBank(@PathVariable String sourceMobileNo,
+			@PathVariable String targetMobileNo, @PathVariable Long amount, @PathVariable String uniqueId) {
+		Wallet wallet = walletService.fundTransfer(sourceMobileNo, targetMobileNo, amount, uniqueId);
+		return new ResponseEntity<Wallet>(wallet, HttpStatus.OK);
+	}
+
 }
