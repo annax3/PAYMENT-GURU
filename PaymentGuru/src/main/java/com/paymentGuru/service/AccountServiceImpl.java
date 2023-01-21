@@ -33,6 +33,8 @@ public class AccountServiceImpl implements AccountServices {
 
 	@Override
 	public Customer addAccount(BankAccount Account, String uniqueId) {
+
+
 		CustomerSession session = csDao.checkCustomerSession(uniqueId);
 
 		if (session != null) {
@@ -131,6 +133,17 @@ public class AccountServiceImpl implements AccountServices {
 			throw new CustomerException("Customer not logged in");
 		}
 
+	}
+
+	@Override
+	public Customer showBalance(String mobileNo) {
+		Customer customer = cDao.findByMobileNumber(mobileNo);
+		if (customer != null) {
+			//prashant
+			return customer;
+		} else {
+			throw new CustomerException("No customer found with mobile number " + mobileNo);
+		}
 	}
 
 }
