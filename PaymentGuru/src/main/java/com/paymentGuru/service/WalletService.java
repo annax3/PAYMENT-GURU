@@ -16,4 +16,5 @@ public interface WalletService {
 
 	public Wallet fundTransfer(String sourceMobileNo, String targetMobileNo, Long amount, String uniqueId);
 
+	public Wallet updateWallet(Wallet wallet);
 }
