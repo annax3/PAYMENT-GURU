@@ -1,4 +1,5 @@
 package com.paymentGuru.model;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class Beneficiary {
 	private String name;
 	private String mobileNo;
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "cusomerId")
 	private Customer customer;
 	public Integer getBid() {

@@ -20,5 +20,40 @@ public class CustomerSession {
 	@Column(unique = true)
 	private Integer customerId;
 	private String uniqueId;
+	
 	private LocalDateTime timeStamp;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getUniqueId() {
+		return uniqueId;
+	}
+
+	public void setUniqueId(String uniqueId) {
+		this.uniqueId = uniqueId;
+	}
+
+	public LocalDateTime getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(LocalDateTime timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+	
+	
 }

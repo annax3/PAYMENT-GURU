@@ -23,24 +23,24 @@ public class BeneficiaryController {
 
 	@PostMapping("/customers/beneficiary")
 	public ResponseEntity<Beneficiary> addBeneficiary(@RequestBody Beneficiary beneficiary,
-			@RequestParam(required = false) String key) throws BeneficiaryException, CustomerException {
-		Beneficiary savedBeneficiary = beneficiaryService.addBeneficiary(beneficiary, key);
+			@RequestParam(required = false) Integer id) throws BeneficiaryException, CustomerException {
+		Beneficiary savedBeneficiary = beneficiaryService.addBeneficiary(beneficiary, id);
 		return new ResponseEntity<Beneficiary>(savedBeneficiary, HttpStatus.BAD_GATEWAY);
 
 	}
 
 	@DeleteMapping("customers/beneficiary")
 	public ResponseEntity<Beneficiary> removeBeneficiaryHandler(@RequestBody Beneficiary beneficiary,
-			@RequestParam(required = false) String key) throws CustomerException, BeneficiaryException {
+			@RequestParam(required = false) Integer id) throws CustomerException, BeneficiaryException {
 
-		Beneficiary removedBeneficiary = beneficiaryService.deleteBeneficiary(beneficiary, key);
+		Beneficiary removedBeneficiary = beneficiaryService.deleteBeneficiary(beneficiary, id);
 		return new ResponseEntity<Beneficiary>(removedBeneficiary, HttpStatus.OK);
 	}
 
 	@GetMapping("/customers/beneficiry")
 	public ResponseEntity<List<Beneficiary>> viewBeneficiary(@RequestParam(required = false) String mobileNo,
-			@RequestParam(required = false) String key) throws CustomerException, BeneficiaryException {
-		List<Beneficiary> beneficiaries = beneficiaryService.viewBeneficiaries(mobileNo, key);
+			@RequestParam(required = false) Integer id) throws CustomerException, BeneficiaryException {
+		List<Beneficiary> beneficiaries = beneficiaryService.viewBeneficiaries(mobileNo, id);
 		return new ResponseEntity<List<Beneficiary>>(beneficiaries, HttpStatus.OK);
 
 	}

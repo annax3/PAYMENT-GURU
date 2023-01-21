@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 			cs.setCustomerId(customer.getCustomerId());
 			cs.setTimeStamp(LocalDateTime.now());
 			cs.setUniqueId(RandomString.make(8));
-
+		
 			CustomerSession cSession = csDao.save(cs);
 			return cSession.toString();
 
