@@ -7,9 +7,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface WalletService {
-    public String showBalance(String mobileNo);
-    public boolean fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount);
-    public Customer depositAmount(Customer customer, BigDecimal amount);
-    public List<Customer> getCustomers();
-    public Customer addMoney(Wallet wallet, Double amount);
+
+	public String showBalance(String uniqueId);
+
+	public Wallet addMoneytoWallet(Integer BankId, Long amount, String uniqueId);
+
+//    public boolean fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount);
+//    public Customer depositAmount(Customer customer, BigDecimal amount);
+//    public List<Customer> getCustomers();
+
 }
