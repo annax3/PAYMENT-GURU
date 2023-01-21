@@ -28,7 +28,7 @@ This is a collaborative project, completed by a team of 4 backend developers.
 - Account service
 - Transaction Service
 - Customer Service
-- Bil Payement Service
+- Bill Payement Service
 - Benificiary Service 
 - Wallet service
 
