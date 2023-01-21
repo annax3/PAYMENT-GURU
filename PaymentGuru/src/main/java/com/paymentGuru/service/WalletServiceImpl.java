@@ -88,4 +88,78 @@ public class WalletServiceImpl implements WalletService {
 
 	}
 
+	@Override
+	public Wallet transferToBank(Integer BankId, Long amount, String uniqueId) {
+		CustomerSession cSession = csDao.findByUniqueId(uniqueId);
+		if (cSession != null) {
+			Optional<Customer> opt = cDao.findById(cSession.getCustomerId());
+			Customer customer = opt.get();
+
+			Optional<BankAccount> optbank = aDao.findById(BankId);
+			BankAccount bank = optbank.get();
+
+			// transaction
+			Wallet wallet = customer.getWallet();
+
+			if (wallet.getBalance() >= amount) {
+
+				long revisedwalletbalance = wallet.getBalance() - amount;
+				long revisedBankBalance = bank.getBalance() + amount;
+
+				bank.setBalance(revisedBankBalance);
+				wallet.setBalance(revisedwalletbalance);
+
+				cDao.save(customer);
+				return customer.getWallet();
+
+			} else {
+				throw new CustomerException("Insufficient balance in wallet");
+			}
+
+		} else {
+			throw new CustomerException("User not logged in!");
+		}
+	}
+
+	// wallet to wallet
+	@Override
+	public Wallet fundTransfer(String sourceMobileNo, String targetMobileNo, Long amount, String uniqueId) {
+		if (!sourceMobileNo.equals(targetMobileNo)) {
+			CustomerSession cSession = csDao.findByUniqueId(uniqueId);
+			if (cSession != null) {
+				Optional<Customer> opt = cDao.findById(cSession.getCustomerId());
+				Customer transferor = opt.get();
+
+				if (transferor.getMobileNumber().equals(sourceMobileNo)) {
+					Customer transforee = cDao.findByMobileNumber(targetMobileNo);
+
+					// check balance
+					if (transferor.getWallet().getBalance() >= amount) {
+
+						Long revisedBankBalanceROR = transferor.getWallet().getBalance() - amount;
+						Long revisedBankBalanceREE = transforee.getWallet().getBalance() + amount;
+						transferor.getWallet().setBalance(revisedBankBalanceROR);
+						transforee.getWallet().setBalance(revisedBankBalanceREE);
+
+						cDao.save(transforee);
+						cDao.save(transferor);
+						return transferor.getWallet();
+
+					} else {
+						throw new CustomerException("Insufficient wallet balance!");
+					}
+
+				} else {
+					throw new CustomerException("customer is not logged in with given sourceMobileNo");
+				}
+
+			} else {
+				throw new CustomerException("User not logged in!");
+			}
+		} else {
+			throw new CustomerException("sourceMobileNo must not be same as targetMobileNo");
+		}
+
+	}
+
 }

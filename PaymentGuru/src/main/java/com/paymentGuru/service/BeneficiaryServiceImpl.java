@@ -26,57 +26,66 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	@Autowired
 	private BeneficiaryDAO beneficiaryDAO;
 
+	@Autowired
+	private CustomerSessionDao csDao;
+
 	@Override
-	public Beneficiary addBeneficiary(Beneficiary beneficiary, Integer Id)
+	public Beneficiary addBeneficiary(Beneficiary beneficiary, String UniqueID)
 			throws BeneficiaryException, CustomerException {
 
-//		CustomerSession loggedInUser = sessionDAO.findByUniqueId(Id);
-
-//		if (loggedInUser == null) {
-//			throw new CustomerException("Please provide a valid key to  add beneficiary...");
-//		}
-
-		Customer existingCustomer = customerDAO.findById(Id)
-				.orElseThrow(() -> new CustomerException("customer not found..create account"));
-		beneficiary.setCustomer(existingCustomer);
-		return beneficiaryDAO.save(beneficiary);
+		CustomerSession cSession = csDao.findByUniqueId(UniqueID);
+		if (cSession != null) {
+			Optional<Customer> opt = customerDAO.findById(cSession.getCustomerId());
+			Customer existingCustomer = opt.get();
+			beneficiary.setCustomer(existingCustomer);
+			return beneficiaryDAO.save(beneficiary);
+		}
+		{
+			throw new CustomerException("customer is not logged in with given sourceMobileNo");
+		}
 
 	}
 
 	@Override
-	public Beneficiary deleteBeneficiary(Beneficiary beneficiary, Integer Id)
-			throws CustomerException, BeneficiaryException {
-//		CustomerSession loggedInUser = sessionDAO.findByUniqueId(Id);
-//
-//		if (loggedInUser == null) {
-//			throw new CustomerException("Please provide a valid key to  add beneficiary...");
-//		}
+	public List<Beneficiary> viewBeneficiaries(String UniqueID) throws CustomerException, BeneficiaryException {
+		CustomerSession cSession = csDao.findByUniqueId(UniqueID);
+		if (cSession != null) {
+			Optional<Customer> opt = customerDAO.findById(cSession.getCustomerId());
+			Customer existingCustomer = opt.get();
+			List<Beneficiary> beneficiaries = beneficiaryDAO.findByCustomer(existingCustomer);
 
-		Beneficiary existingBeneficiary = beneficiaryDAO.findById(beneficiary.getBid())
-				.orElseThrow(() -> new BeneficiaryException("enter corrent beneficiary details"));
+			if (beneficiaries != null) {
+				return beneficiaries;
 
-//		if (existingBeneficiary.getCustomer().getcustomerId() != loggedInUser.getUserId())
-//			throw new CustomerException("customer not found...");
+			} else {
+				throw new BeneficiaryException("No benebficiary yet");
+			}
 
-		beneficiaryDAO.delete(existingBeneficiary);
+		}
+		{
+			throw new CustomerException("customer is not logged in with given sourceMobileNo");
+		}
 
-		return existingBeneficiary;
 	}
 
 	@Override
-	public List<Beneficiary> viewBeneficiaries(String mobileNo, Integer Id)
-			throws CustomerException, BeneficiaryException {
+	public Beneficiary deleteBeneficiary(String UniqueID, Integer bId) throws CustomerException, BeneficiaryException {
+		CustomerSession cSession = csDao.findByUniqueId(UniqueID);
+		if (cSession != null) {
+			Optional<Beneficiary> opt = beneficiaryDAO.findById(bId);
+			if (opt.isPresent()) {
+				Beneficiary existingBeneficiary = opt.get();
+				beneficiaryDAO.delete(existingBeneficiary);
+				return existingBeneficiary;
+			} else {
+				throw new BeneficiaryException("no beneficiary available with the given id");
+			}
 
-//		CustomerSession loggedInUser = sessionDAO.findByUniqueId(Id);
+		}
+		{
+			throw new CustomerException("customer is not logged in with given sourceMobileNo");
+		}
 
-//		if (loggedInUser == null) {
-//			throw new CustomerException("Please provide a valid key to  add beneficiary...");
-//		}
-
-		List<Beneficiary> beneficiaries = beneficiaryDAO.findByMobileNo(mobileNo);
-		if (beneficiaries.isEmpty())
-			throw new BeneficiaryException("NO beneficiary found....");
-
-		return beneficiaries;
 	}
+
 }
