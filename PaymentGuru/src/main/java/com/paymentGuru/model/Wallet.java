@@ -32,6 +32,24 @@ public class Wallet {
 	private Long balance;
 	@OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
 	List<BankAccount> banks = new ArrayList<>();
+	public Integer getWalletId() {
+		return walletId;
+	}
+	public void setWalletId(Integer walletId) {
+		this.walletId = walletId;
+	}
+	public Long getBalance() {
+		return balance;
+	}
+	public void setBalance(Long balance) {
+		this.balance = balance;
+	}
+	public List<BankAccount> getBanks() {
+		return banks;
+	}
+	public void setBanks(List<BankAccount> banks) {
+		this.banks = banks;
+	}
 	
 	
 
