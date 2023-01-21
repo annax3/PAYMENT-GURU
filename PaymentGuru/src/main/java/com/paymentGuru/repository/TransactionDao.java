@@ -9,9 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface TransactionRepository extends JpaRepository<Transaction,Integer> {
-    List<Transaction> findByTransactionDateBetween(LocalDateTime from, LocalDateTime to);
-    List<Transaction> findByTransactionType(String type);
+public interface TransactionDao extends JpaRepository<Transaction, Integer> {
+	List<Transaction> findByTransactionDateBetween(LocalDateTime from, LocalDateTime to);
 
-    List<Transaction> findByWallet(Wallet wallet);
+	List<Transaction> findByTransactionType(String type);
+
+	List<Transaction> findByWallet(Wallet wallet);
+
 }

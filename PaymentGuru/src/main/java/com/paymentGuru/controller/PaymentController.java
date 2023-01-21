@@ -1,5 +1,7 @@
 package com.paymentGuru.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +18,22 @@ import com.paymentGuru.service.BillPaymentService;
 
 @RestController
 public class PaymentController {
-	
+
 	@Autowired
 	private BillPaymentService billPaymentService;
 
-	@PostMapping("/billpayments/{uuid}")
+	@PostMapping("/billpayment/{uniqueid}")
 	public ResponseEntity<BillPayment> addBillpaymentHandler(@RequestBody BillPayment billPayment,
-			@PathVariable("uuid") String uuid) {
-		BillPayment savedBillPayment = billPaymentService.addBillPayment(billPayment, uuid);
+			@PathVariable("uniqueid") String uniqueid) {
+		BillPayment savedBillPayment = billPaymentService.addBillPayment(billPayment, uniqueid);
 		return new ResponseEntity<BillPayment>(savedBillPayment, HttpStatus.CREATED);
 	}
 
-//	@GetMapping("/billpayments/{uuid}/{billId}")
-//	public ResponseEntity<BillPayment> getBillPaymentByBillIdHandler(@PathVariable("billId") Integer billId,
-//			@PathVariable("uuid") String uuid) throws BillPaymentException {
-//
-//		BillPayment bill = billPaymentService.viewBillPayment(uuid, billId);
-//		return new ResponseEntity<BillPayment>(bill, HttpStatus.OK);
-//	}
+	@GetMapping("/paidBills/{uniqueid}")
+	public ResponseEntity<List<BillPayment>> getBillPaymentByBillIdHandler(@PathVariable String uniqueid)
+			throws BillPaymentException {
+
+		List<BillPayment> bills = billPaymentService.viewPaidBills(uniqueid);
+		return new ResponseEntity<List<BillPayment>>(bills, HttpStatus.OK);
+	}
 }

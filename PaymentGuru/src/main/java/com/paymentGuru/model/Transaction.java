@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +27,9 @@ public class Transaction {
 	private Long amount;
 	private String description;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	List<Transaction> transactions = new ArrayList<>();
+	@JsonIgnore
 	@ManyToOne
+	@JoinColumn(name = "walletId")
 	private Wallet wallet;
 
 	public Integer getTransactionId() {
@@ -38,52 +40,44 @@ public class Transaction {
 		this.transactionId = transactionId;
 	}
 
-	public String getTransactionType() {
-		return transactionType;
-	}
+//	public String getTransactionType() {
+//		return transactionType;
+//	}
+//
+//	public void setTransactionType(String transactionType) {
+//		this.transactionType = transactionType;
+//	}
+//
+//	public LocalDateTime getTransactionDate() {
+//		return transactionDate;
+//	}
+//
+//	public void setTransactionDate(LocalDateTime transactionDate) {
+//		this.transactionDate = transactionDate;
+//	}
+//
+//	public Long getAmount() {
+//		return amount;
+//	}
+//
+//	public void setAmount(Long amount) {
+//		this.amount = amount;
+//	}
+//
+//	public String getDescription() {
+//		return description;
+//	}
+//
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//
+//	public Wallet getWallet() {
+//		return wallet;
+//	}
+//
+//	public void setWallet(Wallet wallet) {
+//		this.wallet = wallet;
+//	}
 
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
-	}
-
-	public LocalDateTime getTransactionDate() {
-		return transactionDate;
-	}
-
-	public void setTransactionDate(LocalDateTime transactionDate) {
-		this.transactionDate = transactionDate;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Wallet getWallet() {
-		return wallet;
-	}
-
-	public void setWallet(Wallet wallet) {
-		this.wallet = wallet;
-	}
-
-	public List<Transaction> getTransactions() {
-		return transactions;
-	}
-
-
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
-	}
 }

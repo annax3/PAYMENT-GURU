@@ -29,11 +29,16 @@ public class BillPayment {
 	private String billType;
 	private Long amount;
 	private LocalDate paymentDate;
+	private String billDescription;
 
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 
+	//{"billType":"payment","amount":"500","paymentDate":"2018-03-29","billDescription":"Electricity bill payment"
+    //}
+	
+	
 	public Integer getBillId() {
 		return billId;
 	}

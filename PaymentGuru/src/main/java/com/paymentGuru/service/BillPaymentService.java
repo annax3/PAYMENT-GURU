@@ -1,5 +1,7 @@
 package com.paymentGuru.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.paymentGuru.exception.BillPaymentException;
@@ -8,11 +10,9 @@ import com.paymentGuru.model.BillPayment;
 
 @Service
 public interface BillPaymentService {
-	
-	public BillPayment addBillPayment(BillPayment payment, String uuid) throws WalletException ;
+	// add bill -- pay bill -- add paid bills to database
+	public BillPayment addBillPayment(BillPayment bill, String uuid) throws WalletException;
 
-	
-	//public BillPayment viewBillPayment(String uid, Integer billId) throws BillPaymentException ;
-	
-	
+	public List<BillPayment> viewPaidBills(String uid) throws BillPaymentException;
+
 }
