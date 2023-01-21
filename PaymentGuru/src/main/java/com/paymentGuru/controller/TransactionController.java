@@ -4,6 +4,10 @@ import com.paymentGuru.model.Transaction;
 import com.paymentGuru.model.Wallet;
 import com.paymentGuru.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,28 +17,32 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-    @RequestMapping("/transaction")
-    public class TransactionController {
-    @Autowired
-    private TransactionService tService;
+public class TransactionController {
 
-    @PostMapping("/addTransaction")
-    public Transaction addTransaction(@RequestBody Transaction trans) {
-        return tService.addTransaction(trans);
-    }
+	@Autowired
+	private TransactionService tService;
 
-    @PostMapping("/viewAllTransaction")
-    public List<Transaction> viewAllTransaction(@RequestBody Wallet wallet) {
-        return tService.viewAllTransaction(wallet);
-    }
+	@GetMapping("/viewAllTransaction/{uniqueId}")
+	public ResponseEntity<List<Transaction>> viewAllTransaction(@PathVariable String uniqueId) {
+		return new ResponseEntity<List<Transaction>>(tService.viewAllTransaction(uniqueId), HttpStatus.ACCEPTED);
+	}
 
-    @PostMapping("/viewTransactionByDate")
-    public List<Transaction> viewTransactionByDate(@RequestBody LocalDateTime from, LocalDateTime to) {
-        return tService.viewTransactionByDate(from, to);
-    }
+//
+//	@PostMapping("/viewTransactionByDate")
+//	public List<Transaction> viewTransactionByDate(@RequestBody LocalDateTime from, LocalDateTime to) {
+//		return tService.viewTransactionByDate(from, to);
+//	}
+//
+	@GetMapping("/viewAllTransactionType/{type}/{uniqueId}")
+	public ResponseEntity<List<Transaction>> viewAllTransaction(@PathVariable String type,
+			@PathVariable String uniqueId) {
+		return new ResponseEntity<List<Transaction>>(tService.viewAllTransactionByType(type, uniqueId),
+				HttpStatus.ACCEPTED);
+	}
 
-    @PostMapping("/viewAllTransactionByType")
-    public List<Transaction> viewAllTransactionByType(@RequestBody String type) {
-        return tService.viewAllTransactionByType(type);
-    }
+//	@PostMapping("/addTransaction/{uniqueId}")
+//	public Transaction addTransaction(@RequestBody Transaction trans, @PathVariable String uniqueId) {
+//		return tService.addTransaction12(trans, uniqueId);
+//	}
+
 }
