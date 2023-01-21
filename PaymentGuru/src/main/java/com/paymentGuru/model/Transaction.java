@@ -1,13 +1,10 @@
 package com.paymentGuru.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +25,9 @@ public class Transaction {
 	private Long amount;
 	private String description;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	List<Transaction> transactions = new ArrayList<>();
+	@ManyToOne
 	private Wallet wallet;
 
 	public Integer getTransactionId() {
@@ -79,4 +78,12 @@ public class Transaction {
 		this.wallet = wallet;
 	}
 
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
 }

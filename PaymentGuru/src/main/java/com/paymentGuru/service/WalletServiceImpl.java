@@ -162,4 +162,9 @@ public class WalletServiceImpl implements WalletService {
 
 	}
 
+	@Override
+	public Wallet updateWallet(Wallet wallet) {
+		return wDao.save(wallet);
+	}
+
 }
