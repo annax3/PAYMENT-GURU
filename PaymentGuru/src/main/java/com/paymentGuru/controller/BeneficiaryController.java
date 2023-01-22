@@ -27,7 +27,7 @@ public class BeneficiaryController {
 	public ResponseEntity<Beneficiary> addBeneficiary(@RequestBody Beneficiary beneficiary,
 			@PathVariable String uniqueId) throws BeneficiaryException, CustomerException {
 		Beneficiary savedBeneficiary = beneficiaryService.addBeneficiary(beneficiary, uniqueId);
-		return new ResponseEntity<Beneficiary>(savedBeneficiary, HttpStatus.BAD_GATEWAY);
+		return new ResponseEntity<Beneficiary>(savedBeneficiary, HttpStatus.ACCEPTED);
 
 	}
 
