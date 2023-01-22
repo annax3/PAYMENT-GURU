@@ -53,7 +53,10 @@ https://localhost:8888/
 http://localhost:8888/swagger-ui/
 ```
 # Swagger Home UI (Controllers & Schema)
-
+<img src="https://github.com/annax3/natural-sort-6825/blob/main/home.jpeg" >
+<img src="https://github.com/annax3/natural-sort-6825/blob/main/controller1.jpeg" >
+<img src="https://github.com/annax3/natural-sort-6825/blob/main/controller2.jpeg" >
+<img src="https://github.com/annax3/natural-sort-6825/blob/main/schema.jpeg" >
 
 # Collaborators
 
