@@ -52,6 +52,10 @@ https://localhost:8888/
 ```
 http://localhost:8888/swagger-ui/
 ```
+# ER Diagram
+<img src="https://github.com/annax3/natural-sort-6825/blob/main/ER%20diagram.jpeg" >
+
+
 # Swagger Home UI (Controllers & Schema)
 <img src="https://github.com/annax3/natural-sort-6825/blob/main/home.jpeg" >
 <img src="https://github.com/annax3/natural-sort-6825/blob/main/controller1.jpeg" >
@@ -65,3 +69,4 @@ http://localhost:8888/swagger-ui/
 - [Sandeep Rawat](https://github.com/Sandeeprawat313)
 - [Roshni Gupta](https://github.com/guptaroshni)
 
+                                                                       Thanks for visiting !
