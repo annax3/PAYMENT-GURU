@@ -8,7 +8,7 @@
         src="https://github.com/annax3/natural-sort-6825/blob/main/Payment%20guru%20logo.png"
         alt=""
       /> 
-Paymant Guru is an online wallet payment application system where both customers can interact with the application interface. After authentication, The customer can add the bank account & wallet and able to perform various tasks such as fund transfers and bill payments. The customers can register and log in to add different beneficiary and bank accounts and perform transfers and payments.
+Payment Guru is an online wallet payment application system where both customers can interact with the application interface. After authentication, The customer can add the bank account & wallet and able to perform various tasks such as fund transfers and bill payments. The customers can register and log in to add different beneficiary and bank accounts and perform transfers and payments.
 
 This is a collaborative project, completed by a team of 4 backend developers.
 
